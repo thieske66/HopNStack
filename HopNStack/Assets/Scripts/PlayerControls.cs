@@ -17,6 +17,8 @@ public class PlayerControls : MonoBehaviour
     public BoxCollider BodyCollider;
     public CapsuleCollider RollCollider;
 
+    public bool SafeLanding = false;
+
     private void Awake()
     {
         RollCollider.enabled = false;
@@ -25,6 +27,7 @@ public class PlayerControls : MonoBehaviour
     public void Jump()
     {
         Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+        SafeLanding = false;
     }
 
     public void Fall()
@@ -36,14 +39,20 @@ public class PlayerControls : MonoBehaviour
         RollCollider.enabled = true;
 
         Standing = false;
+
+        Stack.Stop();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("trigger enter");
+        //Check correct landing
+        //yes, continue
+        //No, fall
+
         if (Standing)
         {
             Stack.SpawnNewBlock();
+            SafeLanding = true;
         }
     }
 
@@ -55,10 +64,11 @@ public class PlayerControls : MonoBehaviour
         }
 
         Debug.Log("collision");
-        if (Standing)
+        if (Standing && !SafeLanding)
         {
             Fall();
         }
+        SafeLanding = false;
 
         
     }

@@ -269,7 +269,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274430139}
-  m_Material: {fileID: 13400000, guid: b4bb8ac695955a749bc606f35c9d819b, type: 2}
+  m_Material: {fileID: 13400000, guid: f8cf3b8ecfa6db946b5afb9138882ca5, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -576,6 +576,7 @@ MonoBehaviour:
   FeetCollider: {fileID: 1145059227}
   BodyCollider: {fileID: 274430141}
   RollCollider: {fileID: 55149916}
+  SafeLanding: 0
 --- !u!65 &1145059225
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -595,7 +596,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.05, z: 0.5}
+  m_Size: {x: 0.1, y: 0.025, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &1145059227
 BoxCollider:
@@ -644,7 +645,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &1472155255
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,7 +673,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472155255}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b4bb8ac695955a749bc606f35c9d819b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

@@ -24,8 +24,16 @@ public class Stack : MonoBehaviour
     public GameObject BlockPrefab;
     public Vector2 HeightRange = new Vector2(0.2f, 0.5f);
 
+
+    public bool Spawning = true;
+
     public void SpawnNewBlock()
     {
+        if(!Spawning)
+        {
+            return;
+        }
+
         Debug.Log("Spawn block");
         if (Blocks.Count > 0)
         {
@@ -85,5 +93,10 @@ public class Stack : MonoBehaviour
     {
         block.Velocity = 0f;
         block.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+    public void Stop()
+    {
+        Spawning = false;
     }
 }
