@@ -11,6 +11,8 @@ public class PlayerControls : MonoBehaviour
     public float JumpForce = 1f;
     public Stack Stack;
 
+    
+
     public void Jump()
     {
         Debug.Log("Do jump");
@@ -21,5 +23,15 @@ public class PlayerControls : MonoBehaviour
     {
         Debug.Log("Do fall");
         Rigidbody.constraints = RigidbodyConstraints.None;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Stack.SpawnNewBlock();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 }

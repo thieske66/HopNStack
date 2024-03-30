@@ -1,5 +1,4 @@
 using CustomAttributes;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,12 +22,13 @@ public class Stack : MonoBehaviour
     public bool DoSpawn = false;
 
     public GameObject BlockPrefab;
+    public Vector2 HeightRange = new Vector2(0.2f, 0.5f);
 
     public void SpawnNewBlock()
     {
         if (Blocks.Count > 0)
         {
-            // stop current block
+            Blocks[^1].Velocity = 0f;
         }
 
         // Spawn block
@@ -75,8 +75,7 @@ public class Stack : MonoBehaviour
         float minLength = 1f;
         float length = Mathf.Max(startLength - (2 * (float)stackCount / (float)maxStackScale), minLength);
 
-        Vector2 heightRange = new Vector2(0.5f, 1f);
-        float height = Random.Range(heightRange.x, heightRange.y);
+        float height = Random.Range(HeightRange.x, HeightRange.y);
 
         return new Vector3(width, height, length);
     }
