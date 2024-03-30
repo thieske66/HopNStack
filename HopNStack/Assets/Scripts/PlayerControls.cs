@@ -11,27 +11,55 @@ public class PlayerControls : MonoBehaviour
     public float JumpForce = 1f;
     public Stack Stack;
 
-    
+    public bool Standing = true;
+
+    public BoxCollider FeetCollider;
+    public BoxCollider BodyCollider;
+    public CapsuleCollider RollCollider;
+
+    private void Awake()
+    {
+        RollCollider.enabled = false;
+    }
 
     public void Jump()
     {
-        Debug.Log("Do jump");
         Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
     }
 
     public void Fall()
     {
-        Debug.Log("Do fall");
         Rigidbody.constraints = RigidbodyConstraints.None;
+
+        FeetCollider.enabled = false;
+        BodyCollider.enabled = false;
+        RollCollider.enabled = true;
+
+        Standing = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Stack.SpawnNewBlock();
+        Debug.Log("trigger enter");
+        if (Standing)
+        {
+            Stack.SpawnNewBlock();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if(collision.collider.gameObject.layer == 6)
+        {
+            return;
+        }
+
+        Debug.Log("collision");
+        if (Standing)
+        {
+            Fall();
+        }
+
         
     }
 }

@@ -26,9 +26,10 @@ public class Stack : MonoBehaviour
 
     public void SpawnNewBlock()
     {
+        Debug.Log("Spawn block");
         if (Blocks.Count > 0)
         {
-            Blocks[^1].Velocity = 0f;
+            StopBlock(Blocks[^1]);
         }
 
         // Spawn block
@@ -80,6 +81,9 @@ public class Stack : MonoBehaviour
         return new Vector3(width, height, length);
     }
 
-
-
+    public void StopBlock(Block block)
+    {
+        block.Velocity = 0f;
+        block.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+    }
 }
