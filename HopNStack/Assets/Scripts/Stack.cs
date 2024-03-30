@@ -17,10 +17,12 @@ public class Stack : MonoBehaviour
     }
 
     public float SpawnDistance = 5f;
+    public Vector2 SpeedRange = new Vector2(1f, 2f);
 
     [Button("SpawnNewBlock")]
     public bool DoSpawn = false;
 
+    public GameObject BlockPrefab;
 
     public void SpawnNewBlock()
     {
@@ -30,8 +32,8 @@ public class Stack : MonoBehaviour
         }
 
         // Spawn block
-        GameObject blockObject = new GameObject();
-        Block block = blockObject.AddComponent<Block>();
+        GameObject blockObject = GameObject.Instantiate(BlockPrefab);
+        Block block = blockObject.GetComponent<Block>();
         block.SetDimensions(GetDimensions());
 
         // Set position
@@ -40,7 +42,8 @@ public class Stack : MonoBehaviour
         blockObject.transform.localRotation = Quaternion.LookRotation(new Vector3(spawnDirection.x, 0f, spawnDirection.y) * -1f, Vector3.up);
 
         // Set velocity
-
+        block.Direction = new Vector3(spawnDirection.x, 0f, spawnDirection.y).normalized * -1f;
+        block.Velocity = Random.Range(SpeedRange.x, SpeedRange.y);
 
         Blocks.Add(block);
     }
